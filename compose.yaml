@@ -10,12 +10,32 @@ services:
       - internal
     volumes:
       - ./data/:/var/www/html/
+  # wordpress:
+  #   image: php:fpm-alpine
+  #   networks:
+  #     - internal
+  #   volumes:
+  #     - ./data/:/var/www/html/
+
   wordpress:
-    image: php:fpm-alpine
-    networks:
-      - internal
+    build:
+      context: wordpress
+    # depends_on:
+    #       - service_mariadb
+    # ports:
+    #       - 9000:9000
     volumes:
       - ./data/:/var/www/html/
+    environment:
+      - PS1
+      - WORDPRESS_DB_HOST
+      - WORDPRESS_DB_USER
+      - WORDPRESS_DB_PASSWORD
+      - WORDPRESS_DB_NAME
+    networks:
+      - internal
+
 networks:
   internal:
     driver: bridge
+
