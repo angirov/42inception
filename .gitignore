@@ -1,4 +1,6 @@
+__*
 /data
+/db_data
 *.drawio*
 
 # Certification
