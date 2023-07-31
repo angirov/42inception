@@ -10,7 +10,7 @@ services:
       - internal
     volumes:
       - ./data/:/var/www/html/
-  php:
+  wordpress:
     image: php:fpm-alpine
     networks:
       - internal
