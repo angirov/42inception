@@ -1,0 +1,11 @@
+/srcs/secrets.env
+*.drawio*
+
+# Certification
+*.key
+*.crt
+*.pem
+*.csr
+*.srl
+
+*.log
