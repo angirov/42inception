@@ -12,7 +12,7 @@ services:
     networks:
       - internal
     volumes:
-      - ./data/:/var/www/html/
+      - $HOME/data/www/:/var/www/html/
 
   wordpress:
     image: wordpress
@@ -21,7 +21,7 @@ services:
     depends_on:
           - mariadb
     volumes:
-      - ./data/:/var/www/html/
+      - $HOME/data/www/:/var/www/html/
     environment:
       - PS1
       - WORDPRESS_DB_HOST=mariadb
@@ -38,7 +38,7 @@ services:
     build:
       context: mariadb
     volumes:
-      - ./db_data:/var/lib/mysql
+      - $HOME/data/db:/var/lib/mysql
     env_file:
       - .env
     expose:

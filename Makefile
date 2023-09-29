@@ -4,6 +4,5 @@ all:
 
 clean:
 	docker compose down
-	sudo rm -rf data
-	sudo rm -rf db_data
+	sudo rm -rf ${HOME}/data/*
 	cd cert && ./clean_cert.sh
