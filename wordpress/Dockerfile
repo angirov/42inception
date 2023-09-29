@@ -1,27 +1,22 @@
 #File for creating wordpress image
-FROM alpine:3.15
+FROM debian:bullseye
 
 
-RUN apk update \
-	&& apk add php php-common php-fpm php-json php-session php-mysqli
+# RUN apk update \
+# 	&& apk add php php-common php-fpm php-json php-session php-mysqli
+
+RUN apt-get update && apt-get install -y php-fpm=2:7.4+76 php-mysql wget mariadb-client
 
 
-ADD http://wordpress.org/latest.tar.gz /var/www/
-#RUN tar -xzf /var/www/latest.tar.gz -C /var/www/ --strip-components 1 \
-#	&& rm -rf /var/www/latest.tar.gz
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp && \
+	chmod +x /usr/local/bin/wp
 
-
-RUN tar -xzf /var/www/latest.tar.gz -C /var/www/ \
-	&& rm -rf /var/www/latest.tar.gz
-
-RUN adduser -S nginx && addgroup -S nginx && adduser nginx nginx
-
-
-COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
-COPY conf/setup.sh /var/www/setup.sh
-
+COPY conf/php-fpm.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 EXPOSE 9000
 
+COPY tools/wordpress-setup.sh /
 
-ENTRYPOINT ["sh", "/var/www/setup.sh"]
+WORKDIR /var/www/html
+
+CMD ["bash", "/wordpress-setup.sh"]
