@@ -5,27 +5,21 @@ services:
     build:
       context: .
       dockerfile: nginx/Dockerfile
+    depends_on:
+          - wordpress
     ports: 
       - "443:443"
     networks:
       - internal
     volumes:
       - ./data/:/var/www/html/
-  # wordpress:
-  #   image: php:fpm-alpine
-  #   networks:
-  #     - internal
-  #   volumes:
-  #     - ./data/:/var/www/html/
 
   wordpress:
     image: wordpress
     build:
       context: wordpress
-    # depends_on:
-    #       - service_mariadb
-    # ports:
-    #       - 9000:9000
+    depends_on:
+          - mariadb
     volumes:
       - ./data/:/var/www/html/
     environment:
@@ -38,25 +32,18 @@ services:
       - internal
 
   mariadb:
-    # We use a mariadb image which supports both amd64 & arm64 architecture
-    image: mariadb:10.6.4-focal
-    # If you really want to use MySQL, uncomment the following line
-    #image: mysql:8.0.27
-    command: '--default-authentication-plugin=mysql_native_password'
+    image: mariadb
+    build:
+      context: mariadb
     volumes:
       - ./db_data:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=somewordpress
-      - MYSQL_DATABASE=wordpress
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=admin
+    env_file:
+      - .env
     expose:
       - 3306
-      - 33060
     networks:
       - internal
 
 networks:
   internal:
     driver: bridge
-
