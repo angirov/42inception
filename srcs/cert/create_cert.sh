@@ -12,7 +12,7 @@ openssl x509 -trustout -signkey ${CA_NAME:-ca}.key -days 365 -req -in ${CA_NAME:
 # create server key
 openssl genrsa -out ${SERVER_NAME:-server}.key 4096
 # create CSR
-openssl req -new -config=openssl-csr.conf -key ${SERVER_NAME:-server}.key -out ${SERVER_NAME:-server}.csr
+openssl req -new -config openssl-csr.conf -key ${SERVER_NAME:-server}.key -out ${SERVER_NAME:-server}.csr
 # read CSR
 openssl req -in ${SERVER_NAME:-server}.csr -noout -text
 # sing CSR
