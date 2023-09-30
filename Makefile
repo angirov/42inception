@@ -1,4 +1,6 @@
 all:
+	mkdir -p ${HOME}/data/mariadb
+	mkdir -p ${HOME}/data/wordpress
 	cd srcs/cert && ./create_cert.sh
 	cd srcs && docker compose up -d --build
 
