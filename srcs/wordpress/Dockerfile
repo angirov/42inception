@@ -16,7 +16,8 @@ COPY conf/php-fpm.conf /etc/php/7.4/fpm/pool.d/www.conf
 EXPOSE 9000
 
 COPY tools/wordpress-setup.sh /
+RUN chmod +x /wordpress-setup.sh
 
 WORKDIR /var/www/html
 
-CMD ["bash", "/wordpress-setup.sh"]
+CMD ["/wordpress-setup.sh"]
