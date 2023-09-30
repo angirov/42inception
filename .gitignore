@@ -1,3 +1,5 @@
+srcs/.env
+
 __*
 /data
 /db_data

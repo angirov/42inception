@@ -31,6 +31,7 @@ services:
     networks:
       - internal
     env_file:
+      - hosts.env
       - .env
 
   mariadb:
@@ -40,6 +41,7 @@ services:
     volumes:
       - $HOME/data/db:/var/lib/mysql
     env_file:
+      - hosts.env
       - .env
     expose:
       - 3306

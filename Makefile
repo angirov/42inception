@@ -1,8 +1,8 @@
 all:
-	cd cert && ./create_cert.sh
-	docker compose up -d --build
+	cd srcs/cert && ./create_cert.sh
+	cd srcs && docker compose up -d --build
 
 clean:
-	docker compose down
+	cd srcs && docker compose down
 	sudo rm -rf ${HOME}/data/*
-	cd cert && ./clean_cert.sh
+	cd srcs/cert && ./clean_cert.sh
