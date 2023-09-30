@@ -9,7 +9,9 @@ prepare:
 	-docker volume rm $$(docker volume ls -q)
 	-docker network rm $$(docker network ls -q) 2>/dev/null
 
-clean:
+down:
 	cd srcs && docker compose down
+
+clean: prepare 
 	rm -rf ${HOME}/data/*
 	cd srcs/cert && ./clean_cert.sh
