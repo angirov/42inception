@@ -14,6 +14,9 @@ build:
 up:
 	cd srcs && docker compose -p ${PROJECT_NAME} up -d
 
+stop:
+	cd srcs && docker compose -p ${PROJECT_NAME} stop -d
+
 prepare:
 	-docker stop $$(docker ps -qa)
 	-docker rm $$(docker ps -qa)
@@ -22,11 +25,10 @@ prepare:
 	-docker network rm $$(docker network ls -q) 2>/dev/null
 
 down:
-	cd srcs && docker compose down
+	cd srcs && docker compose -p ${PROJECT_NAME} down
 
 status:
 	docker image ls
-	docker volume ls
 	docker volume ls
 	docker network ls
 	docker ps -a
@@ -40,5 +42,7 @@ clean: down prepare
 	cd srcs/cert && ./clean_cert.sh
 
 recreate: clean all
+
+restart: down up
 
 .PHONY: all build up prepare down status clean restart logwp
