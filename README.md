@@ -1,3 +1,11 @@
+# Prepare
+
+The "official" preparation requires running this:
+
+```
+docker stop $(docker ps -qa); docker rm $(docker ps -qa); docker rmi -f $(docker images -qa); docker volume rm $(docker volume ls -q); docker network rm $(docker network ls -q) 2>/dev/null
+```
+
 # Build
 
 run `make` from the project root directory. Tested both for macOS's docker desktop and Linux.
