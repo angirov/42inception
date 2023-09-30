@@ -22,12 +22,6 @@ services:
           - mariadb
     volumes:
       - wordpress_vol:/var/www/html/
-    environment:
-      - PS1
-      - WORDPRESS_DB_HOST=mariadb
-      - WORDPRESS_DB_USER=admin
-      - WORDPRESS_DB_PASSWORD=admin
-      - WORDPRESS_DB_NAME=wordpress
     networks:
       - inception-net
     env_file:
