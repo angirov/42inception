@@ -13,4 +13,4 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 fi
 mkdir -p /run/php/
 chown www-data:www-data /run/php/
-php-fpm7.4 -F
+exec php-fpm7.4 -F
