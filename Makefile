@@ -4,5 +4,5 @@ all:
 
 clean:
 	cd srcs && docker compose down
-	sudo rm -rf ${HOME}/data/*
+	rm -rf ${HOME}/data/*
 	cd srcs/cert && ./clean_cert.sh

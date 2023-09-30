@@ -1,6 +1,14 @@
+# Build
+
+run `make` from the project root directory. Tested both for macOS's docker desktop and Linux.
+
 There must be an `.env` with environent variables containing credentials, 
 which are set during deployment. 
 For example, you might execute in the project root directory:
+
+## Cleanup
+
+run `make clean` on mac or `sudo make clean` on Linux.
 
 ```
 cat >srcs/.env <<EOF
