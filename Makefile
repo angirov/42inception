@@ -1,11 +1,18 @@
 DOMAIN_NAME := vangirov.42.fr
+PROJECT_NAME := inception
+WP_CONTAINER := ${PROJECT_NAME}-wordpress-1
 
-all:
-	echo "127.0.0.1       ${DOMAIN_NAME}" | tee -a /etc/hosts 
+all: build up status
+
+build:
+	echo "127.0.0.1       ${DOMAIN_NAME}" | sudo tee -a /etc/hosts 
 	mkdir -p ${HOME}/data/mariadb
 	mkdir -p ${HOME}/data/wordpress
 	cd srcs/cert && ./create_cert.sh
-	cd srcs && docker compose up -d --build
+	cd srcs && docker compose build
+
+up:
+	cd srcs && docker compose -p ${PROJECT_NAME} up -d
 
 prepare:
 	-docker stop $$(docker ps -qa)
@@ -17,7 +24,21 @@ prepare:
 down:
 	cd srcs && docker compose down
 
-clean: prepare 
-	sed -i /${DOMAIN_NAME}/d /etc/hosts
-	rm -rf ${HOME}/data/*
+status:
+	docker image ls
+	docker volume ls
+	docker volume ls
+	docker network ls
+	docker ps -a
+
+logwp:
+	watch docker logs ${WP_CONTAINER}
+
+clean: down prepare 
+	sudo sed -i /${DOMAIN_NAME}/d /etc/hosts
+	sudo rm -rf ${HOME}/data/*
 	cd srcs/cert && ./clean_cert.sh
+
+recreate: clean all
+
+.PHONY: all build up prepare down status clean restart logwp
