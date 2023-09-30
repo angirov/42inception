@@ -1,7 +1,7 @@
 version: "3"
 services:
   nginx:
-    image: nginx
+    image: nginx:1.0
     build:
       context: .
       dockerfile: nginx/Dockerfile
@@ -15,7 +15,7 @@ services:
       - $HOME/data/www/:/var/www/html/
 
   wordpress:
-    image: wordpress
+    image: wordpress:1.0
     build:
       context: wordpress
     depends_on:
@@ -35,7 +35,7 @@ services:
       - .env
 
   mariadb:
-    image: mariadb
+    image: mariadb:1.0
     build:
       context: mariadb
     volumes:
