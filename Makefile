@@ -8,8 +8,8 @@ build:
 	echo "127.0.0.1       ${DOMAIN_NAME}" | sudo tee -a /etc/hosts 
 	mkdir -p ${HOME}/data/mariadb
 	mkdir -p ${HOME}/data/wordpress
-	cd srcs/cert && ./create_cert.sh
-	cd srcs && docker compose build
+	cd srcs/requirements/cert && ./create_cert.sh
+	cd srcs && docker compose -p ${PROJECT_NAME} build
 
 up:
 	cd srcs && docker compose -p ${PROJECT_NAME} up -d
@@ -39,7 +39,7 @@ logwp:
 clean: down prepare 
 	sudo sed -i /${DOMAIN_NAME}/d /etc/hosts
 	sudo rm -rf ${HOME}/data/*
-	cd srcs/cert && ./clean_cert.sh
+	cd srcs/requirements/cert && ./clean_cert.sh
 
 recreate: clean all
 

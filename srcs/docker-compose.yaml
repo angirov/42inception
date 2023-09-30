@@ -4,7 +4,7 @@ services:
     image: nginx:1.0
     build:
       context: .
-      dockerfile: nginx/Dockerfile
+      dockerfile: requirements/nginx/Dockerfile
     depends_on:
           - wordpress
     ports: 
@@ -17,7 +17,7 @@ services:
   wordpress:
     image: wordpress:1.0
     build:
-      context: wordpress
+      context: requirements/wordpress
     depends_on:
           - mariadb
     volumes:
@@ -31,7 +31,7 @@ services:
   mariadb:
     image: mariadb:1.0
     build:
-      context: mariadb
+      context: requirements/mariadb
     volumes:
       - mariadb_vol:/var/lib/mysql
     env_file:

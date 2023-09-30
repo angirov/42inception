@@ -3,12 +3,12 @@ FROM debian:bullseye
 RUN apt update \
     && apt install -y nginx
 
-COPY cert/server.key    /etc/ssl/private/server.key
-COPY cert/server.pem    /etc/ssl/certs/server.pem
-COPY cert/ca.pem        /etc/ssl/certs/ca.pem
+COPY requirements/cert/server.key    /etc/ssl/private/server.key
+COPY requirements/cert/server.pem    /etc/ssl/certs/server.pem
+COPY requirements/cert/ca.pem        /etc/ssl/certs/ca.pem
 RUN sed -i -e "s/TLSv1 //" -e "s/TLSv1.1 //" /etc/nginx/nginx.conf
 
-ADD nginx/conf/default.conf /etc/nginx/conf.d/
+COPY requirements/nginx/conf/default.conf /etc/nginx/conf.d/efault.conf
 
 ENTRYPOINT [ "nginx" ]
 
