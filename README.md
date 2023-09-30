@@ -14,10 +14,6 @@ There must be an `.env` with environent variables containing credentials,
 which are set during deployment. 
 For example, you might execute in the project root directory:
 
-## Cleanup
-
-run `make clean` on mac or `sudo make clean` on Linux.
-
 ```
 cat >srcs/.env <<EOF
 # MYSQL SETUP
@@ -35,5 +31,21 @@ WP_USER_PASSWORD=supersecret
 WP_USER_EMAIL=justuser@example.com
 EOF
 ```
+
+## Cleanup
+
+run `make clean` on mac or `sudo make clean` on Linux.
+
+# Security
+
+Check TLS:
+
+```
+openssl s_client -connect localhost:443 -tls1_1
+
+openssl s_client -connect localhost:443 -tls1_2
+```
+
+# Logging in
 
 To login as an user/admin `https://localhost/wp-login.php`
