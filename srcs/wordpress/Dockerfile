@@ -1,9 +1,4 @@
-#File for creating wordpress image
 FROM debian:bullseye
-
-
-# RUN apk update \
-# 	&& apk add php php-common php-fpm php-json php-session php-mysqli
 
 RUN apt-get update && apt-get install -y php-fpm=2:7.4+76 php-mysql wget mariadb-client
 

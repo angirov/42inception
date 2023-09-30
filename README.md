@@ -41,11 +41,11 @@ run `make clean` on mac or `sudo make clean` on Linux.
 Check TLS:
 
 ```
-openssl s_client -connect localhost:443 -tls1_1
+openssl s_client -connect vangirov.42.fr:443 -tls1_1
 
-openssl s_client -connect localhost:443 -tls1_2
+openssl s_client -connect vangirov.42.fr:443 -tls1_2
 ```
 
 # Logging in
 
-To login as an user/admin `https://localhost/wp-login.php`
+To login as an user/admin `https://vangirov.42.fr/wp-login.php`
