@@ -1,10 +1,5 @@
 srcs/.env
 
-__*
-/data
-/db_data
-*.drawio*
-
 # Certification
 *.key
 *.crt
