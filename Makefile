@@ -36,13 +36,15 @@ status:
 logwp:
 	watch docker logs ${WP_CONTAINER}
 
-clean: down prepare 
+clean: down prepare wipecerts
 	sudo sed -i /${DOMAIN_NAME}/d /etc/hosts
 	sudo rm -rf ${HOME}/data/*
+
+wipecerts:
 	cd srcs/requirements/cert && ./clean_cert.sh
 
 recreate: clean all
 
 restart: down up
 
-.PHONY: all build up prepare down status clean restart logwp
+.PHONY: all build up prepare down status clean restart recreate logwp wipecerts
